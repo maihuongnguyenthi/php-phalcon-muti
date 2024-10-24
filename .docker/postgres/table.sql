@@ -30,10 +30,10 @@ VALUES (
         '$2y$12$ZP/ZWAQqgO2riNcKsuF9VueAqKoXquVoRiVreng2Ch888l1IpW.aS'
     ),
     (
-        'Thu Trang',
+        'Thu Tuan',
         '0912341212',
         'Nha Trang City',
-        'Trang.@gmail.com',
+        'Tuan.@gmail.com',
         '$2y$12$ZP/ZWAQqgO2riNcKsuF9VueAqKoXquVoRiVreng2Ch888l1IpW.aS'
     );
 

@@ -1,7 +1,7 @@
 {% extends 'layout.volt' %} {% block title %}
 <title>Sign up</title>
 {% endblock %} {% block content %}
-<section class="login mt-5 d-flex align-items-center bg-dark">
+<section class="login mt-4 d-flex align-items-center bg-dark">
   <div class="container mt-8">
     <div class="row">
       <div class="login__form d-flex flex-column align-items-center">

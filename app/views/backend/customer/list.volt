@@ -77,18 +77,18 @@
   aria-hidden="true"
 >
   <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalLabel">Add Customer</h5>
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="modalLabel">Add Customer</h5>
         <button
           type="button"
           class="btn-close"
           data-bs-dismiss="modal"
           aria-label="Close"
         ></button>
-      </div>
-      <div class="modal-body">
-        <form method="post" id="form" action="/admin/customer/insert">
+          </div>
+          <div class="modal-body">
+              <form method="post" id="form" action="/admin/customer/insert">
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Name:</label>
             <input
@@ -134,7 +134,7 @@
               required
             />
           </div>
-          <div class="modal-footer">
+                  <div class="modal-footer">
             <button
               type="button"
               class="btn btn-secondary"
@@ -145,10 +145,10 @@
             <button type="submit" class="btn btn-primary" id="btn-submit">
               Add
             </button>
+                  </div>
+              </form>
           </div>
-        </form>
       </div>
-    </div>
   </div>
 </div>
 
@@ -160,18 +160,18 @@
   aria-hidden="true"
 >
   <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalLabel">Update Customer</h5>
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="modalLabel">Update Customer</h5>
         <button
           type="button"
           class="btn-close"
           data-bs-dismiss="modal"
           aria-label="Close"
         ></button>
-      </div>
-      <div class="modal-body">
-        <form method="post" id="formUpdate">
+          </div>
+          <div class="modal-body">
+              <form method="post" id="formUpdate">
           <!-- <div class="mb-3 show-id">
             <label for="recipient-name" class="col-form-label">ID:</label>
             <input
@@ -227,7 +227,7 @@
               required
             />
           </div>
-          <div class="modal-footer">
+                  <div class="modal-footer">
             <button
               type="button"
               class="btn btn-secondary"
@@ -238,10 +238,10 @@
             <button type="submit" class="btn btn-primary" id="btn-submit">
               Save
             </button>
+                  </div>
+              </form>
           </div>
-        </form>
       </div>
-    </div>
   </div>
 </div>
 
@@ -253,8 +253,8 @@
   aria-hidden="true"
 >
   <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-content">
+          <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
           Are you sure delete this customer?
         </h5>
@@ -264,9 +264,9 @@
           data-bs-dismiss="modal"
           aria-label="Close"
         ></button>
-      </div>
-      <div class="modal-body">
-        <form method="get" id="formDelete">
+          </div>
+          <div class="modal-body">
+              <form method="get" id="formDelete">
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">ID:</label>
             <input
@@ -289,7 +289,7 @@
               disabled
             />
           </div>
-          <div class="modal-footer">
+                  <div class="modal-footer">
             <button
               type="button"
               class="btn btn-secondary"
@@ -300,10 +300,11 @@
             <button type="submit" class="btn btn-primary btn-delete-submit">
               Delete
             </button>
+                  </div>
+              </form>
           </div>
-        </form>
       </div>
-    </div>
   </div>
 </div>
+
 {% endblock %}

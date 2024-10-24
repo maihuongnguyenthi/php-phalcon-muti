@@ -4,7 +4,6 @@ namespace App\Modules\User\Forms;
 use Phalcon\Forms\Form;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Password;
-// use Phalcon\Forms\Element\Check;
 use Phalcon\Forms\Element\Submit;
 use Phalcon\Filter\Validation\Validator\PresenceOf;
 use Phalcon\Filter\Validation\Validator\StringLength;

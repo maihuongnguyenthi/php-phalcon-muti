@@ -59,8 +59,6 @@ class LoginController extends Controller
                 return $this->response->redirect('/');
             }
         }
-
-        $this->view->form = $form;
     }
 
     /**
@@ -118,8 +116,6 @@ class LoginController extends Controller
                 return $this->response->redirect('/signup');
             }
         }
-
-        $this->view->form = $form;
     }
 }
 ?>
