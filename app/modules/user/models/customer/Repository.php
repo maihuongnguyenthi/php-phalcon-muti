@@ -5,6 +5,7 @@ use App\Modules\User\Models\Customer\Customer;
 
 use Phalcon\Di\Injectable;
 use Phalcon\Encryption\Security;
+use Phalcon\Encryption\Crypt;
 
 
 class Repository extends Injectable
@@ -15,53 +16,50 @@ class Repository extends Injectable
         $this->security = new Security();
     }
 
-    public function signUp($name, $phone, $address, $email, $pass){
-        $checkEmail = Customer::findFirst([
+    public function createCustomer(Customer $users)
+    {
+        $users->save();
+    }
+
+    public function findUserByEmail(string $email): ?Customer
+    {
+        return Customer::findFirst([
             'conditions' => 'email = :email:',
-            'bind'       => [
+            'bind' => [
                 'email' => $email,
             ],
-        ]);
-        if($checkEmail){
-            return -1;
+        ]) ?: null;
+    }
+
+    public function signUp(array $postData, $newUser)
+    {
+        $crypt  = new Crypt();
+        $crypt->setCipher('aes256')->useSigning(false);
+        $encryptedPassword = $crypt->encrypt($postData['pass'], 'mykey');
+        $newUser->pass = base64_encode($encryptedPassword);
+        try {
+            $this->createCustomer($newUser);
+            return $newUser;   
         }
-
-        $this->security->setWorkFactor(12);
-
-        $hashedPassword = $this->security->hash($pass);
-
-        $customer = new Customer();
-        $customer->name = $name;
-        $customer->phone = $phone;
-        $customer->address = $address;
-        $customer->email = $email;
-        $customer->pass = $hashedPassword;
-        $customer->save();
-
-        if ($customer) {
-            return 1;
-        } else {
-            return 0;
+        catch (\Exception $e) {
+            throw new \ErrorException(500, 'Server Error');
         }
     }
 
-    public function checkLogin($email = null, $pass = null)
-    {
-        $user = Customer::findFirst([
-            'conditions' => 'email = :email:',
-            'bind'       => [
-                'email' => $email,
-            ],
-        ]);
-        if(!$user){
+    public function checkLogin(array $postData)
+    {            
+        $user = $this->findUserByEmail($postData['email']);
+        if (!$user) {
             return -1;
         }
-        
-
-        if($this->security->checkHash($pass, $user->pass)){
+        $crypt = new Crypt();
+        $crypt->setCipher('aes256')->useSigning(false);
+        $encryptedPassword = base64_decode($user->pass);
+        $decryptedPassword = $crypt->decrypt($encryptedPassword, 'mykey');
+        if($postData['pass'] === $decryptedPassword){
             return 1;
         }else{
             return 0;
-        }
+        } 
     }
 }
