@@ -1,0 +1,25 @@
+.customer__title {
+  font-size: 42px;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.customer__list {
+  padding: 5%;
+}
+
+.customer__list--btn {
+  margin-bottom: 20px;
+}
+
+.customer__form {
+  .customer__form--info {
+    width: 70px;
+    display: inline-block;
+  }
+
+  .customer__form--error {
+    color: red;
+  }
+}
+  

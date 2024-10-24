@@ -1,0 +1,11 @@
+.customer__detail {
+    text-align: center;
+    display: block;
+  }
+  
+  .customer__detail--info {
+    text-align: start;
+    padding: 5%;
+    font-size: 24px;
+  }
+  
