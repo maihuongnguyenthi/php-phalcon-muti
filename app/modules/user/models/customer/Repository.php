@@ -10,11 +10,11 @@ use Phalcon\Encryption\Crypt;
 
 class Repository extends Injectable
 {
-    private $security;
-    public function __construct()
-    {
-        $this->security = new Security();
-    }
+    // private $security;
+    // public function __construct()
+    // {
+    //     $this->security = new Security();
+    // }
 
     public function createCustomer(Customer $users)
     {

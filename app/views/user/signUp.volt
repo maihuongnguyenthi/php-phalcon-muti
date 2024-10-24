@@ -12,7 +12,7 @@
         </div>
         {% endif %}
         {% if form is defined %}
-        <form action="{{ url('user/signup') }}" id="form-login" role="form" method="post">
+        {{ form({'action': url('user/signup'), 'id': 'form-login', 'role': 'form', 'method': 'post'}) }}
           <div class="mb-3">
             {{ form.label('name') }}
             {{ form.render('name', {'class': 'form-control', 'aria-describedby': 'emailHelp', 'required': 'required'}) }}
@@ -36,7 +36,7 @@
           <div class="mb-3">
             {{ form.render('signup', {'class': 'btn btn-primary'}) }}
           </div>
-        </form>
+        {{ end_form() }}
         {% else %}
         <p>Form is not available. Please check your controller for proper form initialization.</p>
         {% endif %}

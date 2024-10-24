@@ -66,7 +66,7 @@
         </div>
         <?php } ?>
         <?php if (isset($form)) { ?>
-        <form action="<?= $this->url->get('user/signup') ?>" id="form-login" role="form" method="post">
+        <?= $this->tag->form(['action' => $this->url->get("user/signup"), 'id' => "form-login", 'role' => "form", 'method' => "post"]) ?>
           <div class="mb-3">
             <?= $form->label('name') ?>
             <?= $form->render('name', ['class' => 'form-control', 'aria-describedby' => 'emailHelp', 'required' => 'required']) ?>
@@ -90,7 +90,7 @@
           <div class="mb-3">
             <?= $form->render('signup', ['class' => 'btn btn-primary']) ?>
           </div>
-        </form>
+        <?= \Phalcon\Tag::endForm() ?>
         <?php } else { ?>
         <p>Form is not available. Please check your controller for proper form initialization.</p>
         <?php } ?>

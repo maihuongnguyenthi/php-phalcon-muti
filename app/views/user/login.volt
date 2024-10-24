@@ -19,7 +19,7 @@
         </div>
         {% endif %}
         {% if form is defined %}
-        <form action="{{ url('user/login') }}" id="form-login" role="form" method="post">
+        {{ form({'action': url('user/login'), 'id': 'form-login', 'role': 'form', 'method': 'post'}) }}
           <h3 class="text-center fw-bold pb-4">Welcome Back</h3>
           <div class="mb-3">
             {{ form.label('email') }}
@@ -35,7 +35,7 @@
           <div class="text-center mt-3">
             <span>Don't have an account?</span> <a href="/signup" class="text-decoration-none">Sign up here</a>
           </div>
-        </form>
+        {{ end_form() }}
         {% else %}
         <p>Form is not available. Please check your controller for proper form initialization.</p>
         {% endif %}

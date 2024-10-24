@@ -71,7 +71,7 @@
         </div>
         <?php } ?>
         <?php if (isset($form)) { ?>
-        <form action="<?= $this->url->get('user/login') ?>" id="form-login" role="form" method="post">
+        <?= $this->tag->form(['action' => $this->url->get("user/login"), 'id' => "form-login", 'role' => "form", 'method' => "post"]) ?>
           <h3 class="text-center fw-bold pb-4">Welcome Back</h3>
           <div class="mb-3">
             <?= $form->label('email') ?>
@@ -87,7 +87,7 @@
           <div class="text-center mt-3">
             <span>Don't have an account?</span> <a href="/signup" class="text-decoration-none">Sign up here</a>
           </div>
-        </form>
+        <?= \Phalcon\Tag::endForm() ?>
         <?php } else { ?>
         <p>Form is not available. Please check your controller for proper form initialization.</p>
         <?php } ?>
