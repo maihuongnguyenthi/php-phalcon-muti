@@ -6,6 +6,7 @@ use Phalcon\Flash\Session;
 
 use App\Modules\User\Forms\RegisterForm;
 use App\Modules\User\Forms\LoginForm;
+use App\Modules\User\Models\Customer\Customer;
 
 /**
  *
@@ -44,12 +45,12 @@ class LoginController extends Controller
                 }
                 return $this->response->redirect('/');
             }
-
-            $loginResult = $this->userRepo->checkLogin($postData['email'], $postData['pass']);
+            $loginResult = $this->userRepo->checkLogin($postData);
 
             if ($loginResult == 1) {
                 $this->session->set('user', $loginResult);
                 $this->session->set('start_time', time());
+                $this->flashSession->success('Login success!');
                 return $this->response->redirect('/product');
             } elseif ($loginResult == -1) {
                 $this->flashSession->error('No account exists!');
@@ -83,38 +84,45 @@ class LoginController extends Controller
      *  ) 
      * @property Session $flashSession
      */
-    public function signUpAction()
+    public function signupAction(): void
     {
         $form = new RegisterForm();
+        $newUser = new Customer();
+        $postData = $this->request->getPost();
 
-        if ($this->request->isPost()) {
-            $postData = $this->request->getPost();
-            
-            if ($form->isValid($postData) === false) {
+        if (!$this->request->isPost()) {
+            $this->view->form = $form;
+            $this->response->redirect('/signup');
+            return;
+        }
+
+        if (!$form->isValid($postData, $newUser)) {
+            foreach ($form->getMessages() as $message) {
+                $this->flashSession->error($message);
+            }
+            $this->view->form = $form;
+            $this->response->redirect('/signup');
+            return;
+        }
+
+        try {
+            $result = $this->userRepo->signUp($postData, $newUser);
+
+            if(!$result) {  
                 foreach ($form->getMessages() as $message) {
-                    $this->flashSession->error($message);
+                    $this->flashSession->error((string) $message);
                 }
-                return $this->response->redirect('/signup');
+                $this->view->form = $form;
+                $this->response->redirect('/signup');
+                return;
             }
-
-            $signUpResult = $this->userRepo->signUp(
-                $postData['name'], 
-                $postData['phone'], 
-                $postData['address'], 
-                $postData['email'], 
-                $postData['pass']
-            );
-
-            if ($signUpResult == 1) {
-                $this->flashSession->success('Registration success!');
-                return $this->response->redirect('/');
-            } elseif ($signUpResult == -1) {
-                $this->flashSession->error("Email exists!");
-                return $this->response->redirect('/signup');
-            } else {
-                $this->flashSession->error('Registration failed. Please try again.');
-                return $this->response->redirect('/signup');
-            }
+    
+            $this->flashSession->success('Registration success!');
+            $this->response->redirect('/');
+        } catch (ErrorException $e) {
+            $this->flashSession->error('Registration failed. Please try again.');
+            $this->view->form = $form;
+            $this->response->redirect('/signup');
         }
     }
 }
